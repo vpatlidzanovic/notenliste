@@ -32,6 +32,14 @@ public class Test {
 		System.out.println("\nCompareTo:");
 		System.out.println(s.first().compareTo(new Schüler(20, "Viktor", "Patlidzanovic", "B")));
 		
+		System.out.println("\nNoten:");
+		s.first().noteHinzu(Gegenstand.AM, 1);
+		s.first().noteHinzu(Gegenstand.E, 3);
+		System.out.println(s.first().notenListe());
+		
+		System.out.println("\nNote von Gegenstand AM:");
+		System.out.println(s.first().note(Gegenstand.AM));
+		
 		
 		System.out.println("\n--------------\n");
 		

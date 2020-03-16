@@ -34,16 +34,14 @@ public class Emailliste {
 			set.add(email);
 			this.emails.put(s, set);
 		} else {
-			HashSet<String> set = this.emails.get(s);
-			set.add(email);
-			this.emails.put(s, set);
+			this.emails.get(s).add(email);
 		}
 	}
 	
 	/**
 	 * Gibt ein String-Array mit allen Emails des übergebenen Schülers zurück.
 	 * @param s der Schüler, dessen Emails verwendet werden sollen
-	 * @return
+	 * @return das String-Array
 	 */
 	public String[] searchEmail(Schüler s) {
 		String[] cache = null;
@@ -57,7 +55,7 @@ public class Emailliste {
 	
 	/**
 	 * Löscht den Eintrag eines Schülers aus dem Attribut emails.
-	 * @param s
+	 * @param s der Schüler, der gelöscht werden soll
 	 */
 	public void removeSchüler(Schüler s) {
 		if (this.emails.get(s) != null) this.emails.remove(s);
@@ -69,11 +67,7 @@ public class Emailliste {
 	 * @param email die Email, die gelöscht werden soll
 	 */
 	public void removeEmail(Schüler s, String email) {
-		if (this.emails.get(s) != null) {
-			HashSet<String> set = this.emails.get(s);
-			set.remove(email);
-			this.emails.put(s, set);
-		}
+		if (this.emails.get(s) != null) this.emails.get(s).remove(email);
 	}
 	
 	/**

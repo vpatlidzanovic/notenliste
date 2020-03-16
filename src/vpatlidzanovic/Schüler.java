@@ -4,6 +4,8 @@
 package vpatlidzanovic;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
  * @author Viktor Patlidzanovic
@@ -16,6 +18,7 @@ public class Schüler implements Comparable<Schüler>, Serializable {
 	private String vorname;
 	private String nachname;
 	private String gruppe;
+	private HashMap<Gegenstand, Integer> notenListe;
 	
 	/**
 	 * Initalisiert alle Attribute.
@@ -29,6 +32,7 @@ public class Schüler implements Comparable<Schüler>, Serializable {
 		this.vorname = vorname;
 		this.nachname = nachname;
 		this.gruppe = gruppe;
+		this.notenListe = new HashMap<>();
 	}
 
 	/**
@@ -154,5 +158,38 @@ public class Schüler implements Comparable<Schüler>, Serializable {
 		if(ret != 0)
 			return ret;
 		return 0;
+	}
+	
+	/**
+	 * Gibt eine liste aller Gegenstände mit den zugehörigen Noten als String zurück.
+	 * @return eine Liste aller Gegenstände mit Noten als String
+	 */
+	public String notenListe() {
+		StringBuilder cache = new StringBuilder();
+		Set<Gegenstand> set = this.notenListe.keySet();
+		for (Gegenstand g: set) {
+			cache.append(g + "(" + g.getLangname() + "): " + this.notenListe.get(g)+ ", ");
+		}
+		return cache.toString();
+	}
+	
+	/**
+	 * Gibt die note des übergebenen Gegestandes zurück. Wenn keine Note vorhanden ist
+	 * wird -1 zurückgegeben.
+	 * @param g der Gegenstand, dessen Note zurückgegeben werden soll
+	 * @return die Note
+	 */
+	public int note(Gegenstand g) {
+		if (this.notenListe.get(g) != null) return this.notenListe.get(g);
+		return -1;
+	}
+	
+	/**
+	 * Fügt eine Note eines Gegenstandes zur Liste hinzu.
+	 * @param g der Gegenstand, dessen Note hinzugefügt werden soll
+	 * @param note die Note, die hizugefügt werden soll
+	 */
+	public void noteHinzu(Gegenstand g, int note) {
+		this.notenListe.put(g, note);
 	}
 }
